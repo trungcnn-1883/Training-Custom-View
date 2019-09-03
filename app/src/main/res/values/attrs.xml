@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyCustomView">
+        <attr name="job" format="enum">
+            <enum name="Java" value="0"/>
+            <enum name="PHP" value="1"/>
+            <enum name="Python" value="2"/>
+            <enum name="Android" value="3"/>
+        </attr>
+    </declare-styleable>
+</resources>
