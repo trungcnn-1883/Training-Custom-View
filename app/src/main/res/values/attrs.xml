@@ -8,4 +8,22 @@
             <enum name="Android" value="3"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="CustomShape">
+        <attr name="custom_shape" format="enum">
+            <enum name="Square" value="0"/>
+            <enum name="Triagle" value="1"/>
+            <enum name="Rectangle" value="2"/>
+            <enum name="Line" value="3"/>
+            <enum name="Circle" value="4"/>
+        </attr>
+
+        <attr name="custom_color" format="enum">
+            <enum name="orange" value="0"/>
+            <enum name="blue" value="1"/>
+            <enum name="red" value="2"/>
+            <enum name="green" value="3"/>
+        </attr>
+    </declare-styleable>
+
 </resources>

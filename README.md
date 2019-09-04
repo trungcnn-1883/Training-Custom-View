@@ -88,4 +88,73 @@ Còn có postInvalidate() để vẽ view không phải trên main thread
 
 - **requestLayout()**: vẽ lại view, tính toán lại kích thước. Như ta thấy trong sơ đồ lifecycle thì method này sẽ gọi lại view update từ onMeasure().
 
+### 2. Canvas và Paint
+
+### a. Canvas
+
+Là một bề mặt 2D mà ta có thể vẽ lên bất cứ thứ gì lên đó. Với canvas ta có thể vẽ các đối tượng như sau:
+
+- Các đối tượng hình học cơ bản (point, line, oval, circle, rectangle, ...)
+
+- Vẽ hình ảnh (bitmap, drawable)
+
+- Vẽ Path (tập hợp điểm)
+
+- Vẽ Text (sử dụng TextPaint)
+
+Canvas còn có một số tính năng nâng cao như translate, scale, rolate
+
+- Translate: 
+
+```
+
+// Dịch chuyển gốc tọa độ để vẽ một đoạn dx, dy
+
+translate(float dx, float dy)
+
+```
+
+
+- Scale: 
+
+```
+
+// Thay đổi kích thước của vật thể, scale lên sx, sy lần
+
+scale(float sx, float sy)
+
+```
+
+- Rotate:
+
+```
+
+// Xoay đối tượng theo 1 góc xác định
+
+rotate(float degrees)
+
+```
+
+- Save: lưu lại trạng thái canvas hiện tại
+
+- Restore: khôi phục lại trạng thái đã save
+
+### b. Paint
+
+Paint dùng để định nghĩa size, color, kiểu nét vẽ mà chúng ta sẽ sử dụng để vẽ bởi canvas (truyền vào method cavas.draw… trong phương thức onDraw của View).
+
+Paint cung cấp cho chúng ta nhiều method:
+
+- setColor: set màu cho nét vẽ
+
+- setStrokeWidth: độ rộng của nét vẽ
+
+- setStyle: style cho nét vẽ
+
+- setStrokeCap: style vẽ ở những điểm kết thúc của đường thẳng
+
+... 
+
+
+
 

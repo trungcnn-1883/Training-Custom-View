@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -66,32 +67,33 @@ class MyCustomView : LinearLayout {
 
     }
 
-//    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-//
-//        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
-//        val widthSize = MeasureSpec.getSize(widthMeasureSpec)
-//
-//        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
-//        val heightSize = MeasureSpec.getSize(heightMeasureSpec)
-//
-//        var width = 0
-//        var desiredWidth = 400
-//
-//        when (widthMode) {
-//            MeasureSpec.EXACTLY -> {
-//                width = widthSize
-//            }
-//
-//            MeasureSpec.AT_MOST -> {
-//                width = Math.min(widthSize, desiredWidth)
-//            }
-//
-//            else -> width = desiredWidth
-//        }
-//
-//        setMeasuredDimension(width, heightSize)
-//    }
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
+        val widthSize = MeasureSpec.getSize(widthMeasureSpec)
+
+        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
+        val heightSize = MeasureSpec.getSize(heightMeasureSpec)
+
+        var width = 0
+        var desiredWidth = 400
+
+        when (widthMode) {
+            MeasureSpec.EXACTLY -> {
+                width = widthSize
+            }
+
+            MeasureSpec.AT_MOST -> {
+                width = Math.min(widthSize, desiredWidth)
+            }
+
+            else -> width = desiredWidth
+        }
+
+        setMeasuredDimension(width, heightSize)
+        Log.d("MyCustomView", MeasureSpec.toString(widthMeasureSpec))
+    }
 
 //    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
 //        super.onLayout(changed, left, top, right, bottom)
