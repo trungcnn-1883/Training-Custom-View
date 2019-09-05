@@ -9,20 +9,21 @@
         tools:context=".MainActivity">
 
     <gooner.demo.customview.MyCustomView
+            android:id="@+id/main_custom_view"
             android:layout_marginTop="@dimen/margin_normal"
             app:job="Android"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_xlarge"/>
+            android:layout_height="357dp"/>
 
-    <gooner.demo.customview.MyCustomView
-            app:job="Java"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_xlarge"/>
+    <!--<gooner.demo.customview.MyCustomView-->
+            <!--app:job="Java"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/height_xlarge"/>-->
 
-    <gooner.demo.customview.MyCustomView
-            app:job="PHP"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_xlarge"/>
+    <!--<gooner.demo.customview.MyCustomView-->
+            <!--app:job="PHP"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/height_xlarge"/>-->
 
     <gooner.demo.customview.CustomShape
             android:background="@color/colorPrimary"

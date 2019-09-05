@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Training_Custom_View</string>
+	<string name="app_name1">salut</string>
+	<string name="app_name2">Une vue peut avoir une hauteur / largeur maximale de la dimension transmise. </string>
+</resources>

@@ -6,9 +6,12 @@ import android.graphics.Canvas
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import gooner.demo.training_custom_view.R
 
 class MyCustomView : LinearLayout {
@@ -92,12 +95,27 @@ class MyCustomView : LinearLayout {
         }
 
         setMeasuredDimension(width, heightSize)
-        Log.d("MyCustomView", MeasureSpec.toString(widthMeasureSpec))
+        Log.d("MyCustomView", MeasureSpec.toString(widthMeasureSpec) + " " + width)
     }
 
 //    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
 //        super.onLayout(changed, left, top, right, bottom)
 //    }
 
-
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+//        super.onLayout(changed, l, t, r, b)
+        val childCount = childCount
+//        for (i in 0..childCount) {
+//            val v = getChildAt(i)
+//            v.setOnTouchListener(object : OnTouchListener {
+//                override fun onTouch(v: View, event: MotionEvent?): Boolean {
+//                    Toast.makeText(v.context, "AAAAAAAA", Toast.LENGTH_SHORT).show()
+//                    return true
+//                }
+//            })
+//            v.layout(left, top, right, bottom)
+//        }
+    }
 }
+
+

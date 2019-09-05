@@ -24,7 +24,21 @@ Các thuộc tính có sẵn :
 
 Còn nhiều thuộc tính khác như Id, padding, margin, ...
 
-### b. View lifecycle
+### b. Lợi ích / Bất lợi
+
+Lợi ích
+
+- Tái sử dụng được view, được code
+
+- Custom view sẽ có những tính năng, thuộc tính ta tự tạo ra
+
+Bất lợi
+
+- Tốn thời gian, công sức
+
+- Phải chỉnh sửa, custom nhiều thứ
+
+### c. View lifecycle
 
 <img src="https://viblo.asia/uploads/be38a028-69c2-4249-a258-89eba0b6acb7.png">
 
@@ -49,7 +63,29 @@ public PageIndicatorView(Context context, AttributeSet attrs) {
 }
 ```
 
+recycle(): giải phóng bộ nhớ, những thành phần liên kết với tài nguyên, ko cần tới lúc GC chạy. Dùng khi không cần sử dụng TypedArray này nữa
+
+```
+
+    public void recycle() {
+        if (mRecycled) {
+            throw new RuntimeException(toString() + " recycled twice!");
+        }
+
+        mRecycled = true;
+
+        // These may have been set by the client.
+        mXml = null;
+        mTheme = null;
+        mAssets = null;
+
+        mResources.mTypedArrayPool.release(this);
+    }
+
+```
+
 https://developer.android.com/reference/android/graphics/Bitmap.html#recycle()
+
 
 ### onAttachedToWindow
 
@@ -62,6 +98,30 @@ https://developer.android.com/reference/android/graphics/Bitmap.html#recycle()
 ### onMeasure - để tính toán lại, ước lượng kích thước cho View
 
 Kích thước của view có thể đã được xác định trong file xml hoặc trong code. Nhưng trong TH ta muốn thay đổi nó tùy theo 1 điều kiện nào đó thì ta có thể làm ở đây
+
+Có 3 mode kích thước:
+
+- **MeasureSpec.EXACTLY**: 
+
+
+```
+
+// Kích thước cụ thể
+layout_width= “100dp”
+
+// Match parent 
+layout_width=”match_parent”
+
+// Chiếm hết không gian
+layout_weight=”1"
+
+```
+- **MeasureSpec.AT_MOST**: 
+
+View có thể có max width hoặc height của nó, hoặc được để wrap_content
+
+- **MeasureSpec.UNSPECIFIED**: 
+không xác định, layout con kích thước thế nào cũng được. Sử dụng trong ScrollView, ListView.
 
 ### onLayout
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Đào tạo_Custom_View</string>
+	<string name="app_name1">Chào buổi sáng</string>
+	<string name="app_name2">Một khung nhìn có thể có chiều cao / chiều rộng tối đa của kích thước được thông qua. </string>
+</resources>
