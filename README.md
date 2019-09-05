@@ -10,9 +10,9 @@ Những gì ta thấy trên màn hình thiết bị Android thì được gọi 
 
 <img src="http://eitguide.net/wp-content/uploads/2016/07/layout-android-0.png" width=400>
 
-Điểm khác biệt là có các thuộc tính mới để đáp ứng nhu cầu của View đó
+Điểm khác biệt là có các thuộc tính mới để đáp ứng nhu cầu của View đó\
 
-Các thuộc tính có sẵn:
+Các thuộc tính có sẵn :
 
 - Thuộc tính: setText, setTextColor, setBackGroundResource, setTextAllCap, ...
 
