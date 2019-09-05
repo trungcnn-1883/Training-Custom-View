@@ -5,9 +5,14 @@ import android.util.AttributeSet
 import android.view.View
 import android.graphics.Path.FillType
 import android.graphics.*
-import android.graphics.RectF
+import android.util.Log
 import android.view.MotionEvent
+import android.view.MotionEvent.*
+import android.widget.Toast
 import gooner.demo.training_custom_view.R
+import android.animation.ValueAnimator
+import android.support.v4.view.animation.FastOutSlowInInterpolator
+import android.view.animation.*
 
 
 class CustomShape : View {
@@ -15,8 +20,9 @@ class CustomShape : View {
     lateinit var mColorPaint: Paint
     var mShape: Int = 0
     var mRec = Rect(0, 0, 600, 300)
-    var mSquare = Rect(100, 100, 300, 300)
+    var mSquare = null
     lateinit var mPath: Path
+    var mWidth: Int = 0
 
     constructor(context: Context) : super(context) {
         init(context, null, 0)
@@ -38,6 +44,7 @@ class CustomShape : View {
         mColorPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         mPath = Path()
 
+
         val color = typedArray.getInteger(R.styleable.CustomShape_custom_color, 0)
         when (color) {
             0 -> mColorPaint.color = context.getColor(R.color.colorOrange)
@@ -46,21 +53,16 @@ class CustomShape : View {
             3 -> mColorPaint.color = context.getColor(R.color.colorGreen)
         }
 
+        val animator = ValueAnimator.ofInt(0, 500)
+        animator.duration = 3000
+        animator.interpolator = AccelerateInterpolator()
+        animator.addUpdateListener { animation ->
+            mWidth = animation.animatedValue as Int
+            invalidate()
+        }
+        animator.start()
     }
 
-//    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-//        super.onSizeChanged(w, h, oldw, oldh)
-//
-//    }
-
-//    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-//        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-////        val w = MeasureSpec.getSize(widthMeasureSpec)
-////        val h = MeasureSpec.getSize(heightMeasureSpec)
-////
-////        val size = Math.min(w, h)
-////        setMeasuredDimension(size, size)
-//    }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -70,43 +72,35 @@ class CustomShape : View {
             // Draw a square
             0 -> {
 
-//                mColorPaint.apply {
-//                    style = Paint.Style.STROKE
-//                    strokeWidth = 20f
-//                    strokeCap = Paint.Cap.ROUND
-//                    strokeJoin = Paint.Join.ROUND
-//                }
-//
-//                canvas.drawRect(mSquare, mColorPaint)
-
-
-                //if you want to add a circle around the polygon using path
-                // path.addCircle(cx, cy, circleRadius, Path.Direction.CW)
-                //draw polygon
-                canvas.drawPath(createPath(canvas, 3, 150f), mColorPaint.apply {
+                mColorPaint.apply {
                     style = Paint.Style.STROKE
+                    strokeWidth = 20f
+                    strokeCap = Paint.Cap.ROUND
+                    strokeJoin = Paint.Join.ROUND
+                }
+
+                canvas.drawRect(Rect(100, 100, mWidth, 300), mColorPaint)
+                Log.d("Width", mWidth.toString())
+
+
+//                //if you want to add a circle around the polygon using path
+//                // path.addCircle(cx, cy, circleRadius, Path.Direction.CW)
+//                //draw polygon
+//                canvas.drawPath(createPath(canvas, 4, 150f), mColorPaint.apply {
+//                    strokeWidth = 30f
+////                    pathEffect = CornerPathEffect(20f)
+//                })
+
+            }
+            1 -> {
+                canvas.drawPath(createPath(canvas, 3, 150f), mColorPaint.apply {
                     strokeWidth = 30f
                 })
 
             }
-            1 -> {
-                val a = Point(0, 0)
-                val b = Point(0, 100)
-                val c = Point(87, 50)
-
-                val path = Path()
-                path.setFillType(FillType.EVEN_ODD)
-                path.moveTo(a.x as Float, a.y as Float)
-                path.lineTo(b.x as Float, b.y as Float)
-                path.moveTo(b.x as Float, b.y as Float)
-                path.lineTo(c.x as Float, c.y as Float)
-                path.moveTo(c.x as Float, c.y as Float)
-                path.lineTo(a.x as Float, a.y as Float)
-                path.close()
-                canvas.drawPath(path, mColorPaint)
-
+            2 -> {
+                canvas.drawRect(Rect(0, 0, 600, mWidth), mColorPaint)
             }
-            2 -> canvas.drawRect(mRec, mColorPaint)
             3 -> {
                 mColorPaint.apply {
                     style = Paint.Style.FILL
@@ -139,22 +133,50 @@ class CustomShape : View {
         val cx = canvas.width / 2
         val cy = canvas.height / 2
         val angle = 2.0 * Math.PI / sides
+
         mPath.moveTo(
-            cx + (radius * Math.cos(0.0)).toFloat(),
+            cx + (radius * Math.cos(0.0).toFloat()),
             cy + (radius * Math.sin(0.0)).toFloat()
         )
-        for (i in 1 until sides) {
-            mPath.lineTo(
-                cx + (radius * Math.cos(angle * i)).toFloat(),
-                cy + (radius * Math.sin(angle * i)).toFloat()
-            )
-        }
+//        for (i in 1 until sides) {
+        mPath.lineTo(
+            cx + (radius * Math.cos(angle * 1)).toFloat(),
+            cy + (radius * Math.sin(angle * 1)).toFloat()
+        )
+        Log.d(
+            "Math",
+            " " + (radius * Math.cos(angle * 1)).toFloat() + " " + Math.cos(angle * 1) + " " + angle * 1
+        )
+
+
+        mPath.lineTo(
+            cx + 150f,
+            cy + 150f
+        )
+
         mPath.close()
+//        }
         return mPath
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        val x = event.x
+        val y = event.y
+        Toast.makeText(this.context, "AAAAAAaa", Toast.LENGTH_SHORT)
+
+        when (event.action) {
+            ACTION_DOWN -> {
+                mPath.moveTo(x, y)
+            }
+            ACTION_MOVE -> {
+                mPath.lineTo(x, y)
+            }
+            ACTION_UP -> {
+                mPath.moveTo(x, y)
+            }
+        }
         return super.onTouchEvent(event)
+
     }
 
 }

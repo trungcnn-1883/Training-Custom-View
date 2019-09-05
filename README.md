@@ -8,7 +8,7 @@
 
 Những gì ta thấy trên màn hình thiết bị Android thì được gọi là View
 
-<img src="http://eitguide.net/wp-content/uploads/2016/07/layout-android-0.png" width=280>
+<img src="http://eitguide.net/wp-content/uploads/2016/07/layout-android-0.png" width=400>
 
 Điểm khác biệt là có các thuộc tính mới để đáp ứng nhu cầu của View đó
 
@@ -154,6 +154,73 @@ Paint cung cấp cho chúng ta nhiều method:
 - setStrokeCap: style vẽ ở những điểm kết thúc của đường thẳng
 
 ... 
+
+### 3. Interpolator cho animation
+
+Sử dụng đối tượng ValueAnimator: animation cho các thay đổi đơn giản như về kích thước, màu sắc, xoay, ...
+
+Mỗi lần phát ra một giá trị là gọi invalidate() -> onDraw để vẽ lại hình 
+
+```
+        val animator = ValueAnimator.ofInt(0, 500)
+        animator.duration = 3000
+        animator.interpolator = AccelerateInterpolator()
+        animator.addUpdateListener { animation ->
+            mWidth = animation.animatedValue as Int
+            invalidate()
+        }
+        animator.start()
+```
+
+<img src="img/cu1.gif">
+
+Có nhiều loại Interpolatar để sử dụng
+
+- Accelerate interpolator
+
+- Decelerate interpolator 
+
+- Accelerate decelerate interpolator
+
+- Anticipate interpolator
+
+- Overshoot interpolator 
+
+- Bounce interpolator 
+
+Có thể thêm Interpolator trong file class hoặc trong xml file
+
+Tạo file /res/animator/value_animator_ex.xml
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<animator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="2000"
+    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+    android:valueFrom="0f"
+    android:valueTo="500f"
+    android:valueType="floatType" />
+
+```
+
+```
+ private void setUpAnimation(){
+        final TextView textAnimation = (TextView) findViewById(R.id.text_animation);
+        ValueAnimator valueAnimator = (ValueAnimator) AnimatorInflater.loadAnimator(
+                this, R.animator.value_animator_ex);
+
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float progress = (float) animation.getAnimatedValue();
+                textAnimation.setTranslationY(progress);
+            }
+        });
+        valueAnimator.start();
+    }
+
+```
+
 
 
 

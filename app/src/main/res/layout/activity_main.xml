@@ -25,23 +25,24 @@
             android:layout_height="@dimen/height_xlarge"/>
 
     <gooner.demo.customview.CustomShape
+            android:background="@color/colorPrimary"
             android:layout_marginTop="@dimen/margin_large"
             app:custom_color="orange"
             app:custom_shape="Square"
             android:layout_width="wrap_content"
-            android:layout_height="301dp"/>
+            android:layout_height="125dp"/>
 
     <gooner.demo.customview.CustomShape
             app:custom_color="green"
             app:custom_shape="Rectangle"
             android:layout_width="wrap_content"
-            android:layout_height="136dp"/>
+            android:layout_height="188dp"/>
 
     <gooner.demo.customview.CustomShape
             app:custom_color="red"
             app:custom_shape="Rectangle"
             android:layout_width="wrap_content"
-            android:layout_height="97dp"/>
+            android:layout_height="133dp"/>
 
     <gooner.demo.customview.CustomShape
             app:custom_color="green"
