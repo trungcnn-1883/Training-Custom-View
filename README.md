@@ -8,7 +8,7 @@
 
 Những gì ta thấy trên màn hình thiết bị Android thì được gọi là View
 
-<img src="http://eitguide.net/wp-content/uploads/2016/07/layout-android-0.png" width=400>
+<img src="http://eitguide.net/wp-content/uploads/2016/07/layout-android-0.png" width=600>
 
 Điểm khác biệt là có các thuộc tính mới để đáp ứng nhu cầu của View đó\
 
@@ -172,7 +172,7 @@ Mỗi lần phát ra một giá trị là gọi invalidate() -> onDraw để v�
         animator.start()
 ```
 
-<img src="img/cu1.gif">
+<img src="img/cu1.gif" width="290">
 
 Có nhiều loại Interpolatar để sử dụng
 
