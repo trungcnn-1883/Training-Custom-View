@@ -1,12 +1,16 @@
 package gooner.demo.recodeonline
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import gooner.demo.training_custom_view.R
 
 
@@ -56,23 +60,40 @@ class ImageSteps : LinearLayout {
     }
 
 
+    @SuppressLint("ResourceAsColor")
     private fun goToStep(step: Int, direction: String) {
 
         // currentView to bigger
-        mRootView.findViewWithTag<ImageView>(step).apply {
-            setImageResource(mStepImage[step])
-        }
+        mRootView.findViewWithTag<ImageView>(step)
+            .apply {
+                setImageResource(mStepImage[step])
+            }
+
+        mRootView.findViewWithTag<TextView>(step)
+            .apply {
+                setTextColor(R.color.colorWhite)
+            }
 
         when (direction) {
             GO_NEXT -> if (step > START_STEP) {
-                mRootView.findViewWithTag<ImageView>(step - 1).apply {
-                    setImageDrawable(null)
-                }
+                mRootView.findViewWithTag<ImageView>(step - 1)
+                    .apply {
+                        setImageDrawable(null)
+                    }
+                mRootView.findViewWithTag<TextView>(step - 1)
+                    .apply {
+                        setTextColor(R.color.colorGray)
+                    }
             }
             GO_PREVIOUS -> if (step < mStepImage.lastIndex) {
-                mRootView.findViewWithTag<ImageView>(step + 1).apply {
-                    setImageDrawable(null)
-                }
+                mRootView.findViewWithTag<ImageView>(step + 1)
+                    .apply {
+                        setImageDrawable(null)
+                    }
+                mRootView.findViewWithTag<TextView>(step + 1)
+                    .apply {
+                        setTextColor(R.color.colorGray)
+                    }
             }
         }
 
@@ -94,24 +115,34 @@ class ImageSteps : LinearLayout {
 
 
     fun generateView(step: Int, isLastItem: Boolean) {
-        var stepView = LayoutInflater.from(context).inflate(R.layout.step, mRootView, false).apply {
-            tag = mStepCount
-        }
-        stepView.findViewById<ImageView>(R.id.step).run {
-            layoutParams = LinearLayout.LayoutParams(dpTopixel(35F), dpTopixel(35F))
-            mRootView.addView(this)
-        }
+        var stepRootView =
+            LayoutInflater.from(context).inflate(R.layout.step, mRootView, false).run {
+                findViewById<ImageView>(R.id.step_image).apply {
+                    tag = mStepCount
+                }
 
-        var line = LayoutInflater.from(context).inflate(R.layout.line, mRootView, false)
+                findViewById<TextView>(R.id.step_text).apply {
+                    text = "Step ${step + 1}"
+                    tag = mStepCount
+                }
 
-        if (!isLastItem)
-            mRootView.addView(line)
+                if (isLastItem) {
+                    findViewById<View>(R.id.step_line).apply {
+                        visibility = View.GONE
+                    }
+                }
+
+                mRootView.addView(this)
+
+            }
+
     }
 
 
     fun pixelTodp(pixel: Float): Int {
         val density = context.resources.displayMetrics.density
         return (pixel / density).toInt()
+
     }
 
     fun dpTopixel(dp: Float): Int {
