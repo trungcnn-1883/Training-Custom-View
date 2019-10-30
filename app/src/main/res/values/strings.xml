@@ -2,4 +2,7 @@
     <string name="app_name">Training_Custom_View</string>
     <string name="app_name1">Good morning</string>
     <string name="app_name2">A view can have maximum height/width of dimension passed. However, it can be also smaller if it wishes to be. Eg android:layout_width=”wrap_content”</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/line"
+        android:layout_width="@dimen/size_32dp"
+        android:layout_height="@dimen/size_2dp"
+        android:background="@color/colorWhite"
+        android:orientation="vertical" />

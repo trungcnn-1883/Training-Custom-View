@@ -3,6 +3,9 @@ package gooner.demo.customview
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Rect
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
@@ -70,8 +73,22 @@ class MyCustomView : LinearLayout {
 
     }
 
+//    override fun onDraw(canvas: Canvas) {
+//        super.onDraw(canvas)
+//        canvas.drawRect(Rect(0, 0, 100, 100), Paint().apply {
+//            color = Color.YELLOW
+//        })
+//    }
+
+//    override fun dispatchDraw(canvas: Canvas) {
+////        super.dispatchDraw(canvas)
+//        canvas.drawRect(Rect(0, 0, 100, 100), Paint().apply {
+//            color = Color.MAGENTA
+//        })
+//    }
+
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
 
         val widthMode = MeasureSpec.getMode(widthMeasureSpec)
         val widthSize = MeasureSpec.getSize(widthMeasureSpec)
@@ -102,20 +119,20 @@ class MyCustomView : LinearLayout {
 //        super.onLayout(changed, left, top, right, bottom)
 //    }
 
-    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-//        super.onLayout(changed, l, t, r, b)
-        val childCount = childCount
-//        for (i in 0..childCount) {
-//            val v = getChildAt(i)
-//            v.setOnTouchListener(object : OnTouchListener {
-//                override fun onTouch(v: View, event: MotionEvent?): Boolean {
-//                    Toast.makeText(v.context, "AAAAAAAA", Toast.LENGTH_SHORT).show()
-//                    return true
-//                }
-//            })
-//            v.layout(left, top, right, bottom)
-//        }
-    }
+//    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+////        super.onLayout(changed, l, t, r, b)
+//        val childCount = childCount
+////        for (i in 0..childCount) {
+////            val v = getChildAt(i)
+////            v.setOnTouchListener(object : OnTouchListener {
+////                override fun onTouch(v: View, event: MotionEvent?): Boolean {
+////                    Toast.makeText(v.context, "AAAAAAAA", Toast.LENGTH_SHORT).show()
+////                    return true
+////                }
+////            })
+////            v.layout(left, top, right, bottom)
+////        }
+//    }
 }
 
 

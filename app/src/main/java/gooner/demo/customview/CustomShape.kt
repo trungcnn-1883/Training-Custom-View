@@ -11,7 +11,8 @@ import android.view.MotionEvent.*
 import android.widget.Toast
 import gooner.demo.training_custom_view.R
 import android.animation.ValueAnimator
-import android.support.v4.view.animation.FastOutSlowInInterpolator
+import androidx.core.content.ContextCompat
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import android.view.animation.*
 
 
@@ -67,10 +68,25 @@ class CustomShape : View {
         super.onLayout(changed, left, top, right, bottom)
     }
 
+    override fun dispatchDraw(canvas: Canvas) {
+        super.dispatchDraw(canvas)
+        Log.d("CustomShape", "dispatchDraw")
+//        canvas.drawRect(Rect(0, 0, 100, 100), Paint().apply {
+//            color = Color.MAGENTA
+//        })
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+    }
+
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
+        canvas.drawRect(Rect(0, 0, 100, 100), Paint().apply {
+            color = Color.MAGENTA
+        })
         // draw shape base on choosen one
         when (mShape) {
             // Draw a square
